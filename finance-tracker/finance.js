@@ -1,27 +1,69 @@
+const transactions = require('./data');
+
 function addTransaction(transaction) {
-  // TODO: Implement this function
+  return [...transactions, transaction];
 }
 
 function getTotalIncome() {
-  // TODO: Implement this function
+  let total = 0;
+  for (const tx of transactions) {
+    if (tx.type === 'income') {
+      total += tx.amount;
+    }
+  }
+  return total;
 }
 
 function getTotalExpenses() {
-  // TODO: Implement this function
+  let total = 0;
+  for (const tx of transactions) {
+    if (tx.type === 'expense') {
+      total += tx.amount;
+    }
+  }
+  return total;
 }
 
 function getBalance() {
-  // TODO: Implement this function
+  return getTotalIncome() - getTotalExpenses();
 }
 
 function getTransactionsByCategory(category) {
-  // TODO: Implement this function
+  const filtered = [];
+  for (const tx of transactions) {
+    if (tx.category === category) {
+      filtered.push(tx);
+    }
+  }
+  return filtered;
 }
 
 function getLargestExpense() {
-  // TODO: Implement this function
+  let largest = { amount: 0, description: 'None' };
+
+  for (const tx of transactions) {
+    // Check if it is an expense AND if it's larger than our current record
+    if (tx.type === 'expense' && tx.amount > largest.amount) {
+      largest = tx;
+    }
+  }
+  return largest;
 }
 
 function printAllTransactions() {
-  // TODO: Implement this function
+  transactions.forEach((tx, index) => {
+    console.log(
+      `${index + 1}. [${tx.type.toUpperCase()}] ${tx.description} - €${tx.amount} (${tx.category})`,
+    );
+  });
 }
+
+module.exports = {
+  addTransaction,
+  getTotalIncome,
+  getTotalExpenses,
+  getBalance,
+  getTransactionsByCategory,
+  getLargestExpense,
+  printAllTransactions,
+};
