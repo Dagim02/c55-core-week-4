@@ -9,14 +9,14 @@ const {
   printAllTransactions,
 } = require('./finance');
 
-// HEADER
+// Header
 console.log(chalk.bold('\n💰 PERSONAL FINANCE TRACKER 💰'));
 
-// ALL TRANSACTIONS
+// All transactions
 console.log('\nAll Transactions:');
 printAllTransactions();
 
-// SUMMARY HEADER
+// Summary header
 console.log(chalk.bold('\n📊 FINANCIAL SUMMARY 📊'));
 
 const income = getTotalIncome();
