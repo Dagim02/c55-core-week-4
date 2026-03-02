@@ -5,22 +5,19 @@ function addTransaction(transaction) {
 }
 
 function getTotalIncome() {
-  let total = 0;
-  for (const tx of transactions) {
-    if (tx.type === 'income') {
-      total += tx.amount;
-    }
-  }
+  const total = transactions.reduce(
+    (total, tx) => (tx.type === 'income' ? total + tx.amount : total),
+    0,
+  );
+
   return total;
 }
 
 function getTotalExpenses() {
-  let total = 0;
-  for (const tx of transactions) {
-    if (tx.type === 'expense') {
-      total += tx.amount;
-    }
-  }
+  const total = transactions.reduce(
+    (total, tx) => (tx.type === 'expense' ? total + tx.amount : total),
+    0,
+  );
   return total;
 }
 
@@ -29,24 +26,21 @@ function getBalance() {
 }
 
 function getTransactionsByCategory(category) {
-  const filtered = [];
-  for (const tx of transactions) {
-    if (tx.category === category) {
-      filtered.push(tx);
-    }
-  }
-  return filtered;
+  const getByCatagory = transactions.filter((tx) => tx.category === category);
+  return getByCatagory;
 }
 
 function getLargestExpense() {
-  let largest = { amount: 0, description: 'None' };
-
+  let largest = null;
   for (const tx of transactions) {
-    // Check if it is an expense AND if it's larger than our current record
-    if (tx.type === 'expense' && tx.amount > largest.amount) {
+    if (
+      tx.type === 'expense' &&
+      (largest === null || tx.amount > largest.amount)
+    ) {
       largest = tx;
     }
   }
+
   return largest;
 }
 

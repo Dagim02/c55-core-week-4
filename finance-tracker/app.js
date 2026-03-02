@@ -1,4 +1,6 @@
 const chalk = require('chalk');
+const transactions = require('./data');
+
 const {
   getTotalIncome,
   getTotalExpenses,
@@ -28,11 +30,10 @@ console.log(`Total Expenses: ${chalk.red('€' + expenses)}`);
 const balanceColor = balance >= 0 ? chalk.cyan : chalk.red;
 console.log(`Current Balance: ${balanceColor('€' + balance)}`);
 
-// LARGEST EXPENSE & COUNT
+// largest expenses and total
 const largest = getLargestExpense();
 console.log(
-  `\nLargest Expense: ${chalk.yellow(largest.description)} (${chalk.red('€' + largest.amount)})`,
+  `\nLargerst Expenses: ${chalk.yellow(largest.description)} (${chalk.red('€' + largest.amount)})`,
 );
-// Use the .length property of the transactions array we imported
-const transactions = require('./data');
+
 console.log(`Total Transactions: ${transactions.length}\n`);
