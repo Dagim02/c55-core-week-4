@@ -31,16 +31,12 @@ function getTransactionsByCategory(category) {
 }
 
 function getLargestExpense() {
-  let largest = null;
-  for (const tx of transactions) {
-    if (
-      tx.type === 'expense' &&
-      (largest === null || tx.amount > largest.amount)
-    ) {
-      largest = tx;
-    }
-  }
-
+  const largest = transactions
+    .filter((tx) => tx.type === 'expense')
+    .reduce(
+      (max, tx) => (max === null || tx.amount > max.amount ? tx : max),
+      null,
+    );
   return largest;
 }
 
